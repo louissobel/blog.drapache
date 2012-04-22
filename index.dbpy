@@ -1,0 +1,20 @@
+
+
+
+info = load_json('_info.json')
+
+posts_meta = load_json('_posts.json')
+
+
+for post in posts_meta:
+	file_path = "_posts/post_%d.markdown" % post['id']
+	post_html = markdown_to_html(read_file(file_path))
+	
+	post['html'] = post_html
+	
+	
+template_data = {}
+template_data['info'] = info
+template_data['posts'] = [post for post in posts_meta if post['published']]
+
+render_template('_home.jinja',with_data=template_data)
