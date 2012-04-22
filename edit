@@ -1,0 +1,43 @@
+#DBPYEXECUTE
+
+
+start_session()
+
+
+logged_in = SESSION.get('logged_in')
+
+
+if logged_in:
+
+	posts_meta = load_json('_posts.json')
+
+	if 'id' in GETPARAMS:
+		if not GETPARAMS['id']:
+			die()
+			
+		post_id = int(GETPARAMS['id'][0])
+		post_file = "_posts/post_%d.markdown" % post_id
+		
+		post_meta = [post for post in posts_meta if post['id'] == post_id]
+		if not post_meta:
+			die()
+			
+		post_meta = post_meta[0]
+		
+		template_data = {}
+		template_data['info'] = post_meta
+		template_data['markdown'] = read_file(post_file)
+		render_template('_edit_post.jinja',with_data=template_data)
+		die()
+		
+	else:
+		template_data = {}
+		template_data['posts'] = posts_meta
+		render_template('_edit_blog.jinja',with_data=posts_meta)
+		die()
+		
+		
+else:
+	
+	SESSION['failed_attempt'] = True
+	redirect('login')

@@ -1,19 +1,27 @@
 
+start_session()
 
+logged_in = SESSION.get('logged_in',False)
 
 info = load_json('_info.json')
 
 posts_meta = load_json('_posts.json')
 
-
-for post in posts_meta:
-	file_path = "_posts/post_%d.markdown" % post['id']
-	post_html = markdown_to_html(read_file(file_path))
+if posts_meta:
+	open_post = None
+	post_index = 0
 	
-	post['html'] = post_html
+	while open_post is None:
+		if posts_meta[post_index]['published']:
+			open_post = posts_meta[post_index]
+			post_index += 1
+		
+	open_post_path = "_posts/post_%d.markdown" % open_post['id']
+	open_post['body'] = markdown_to_html(read_file(open_post_path))
 	
 	
 template_data = {}
+template_data['logged_in'] = logged_in
 template_data['info'] = info
 template_data['posts'] = [post for post in posts_meta if post['published']]
 

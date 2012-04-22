@@ -1,0 +1,36 @@
+
+
+users_hash = {'sobel':'test',
+				'sample':'abc123'}
+				
+				
+user_l = POSTPARAMS.get('username',False)
+
+password_l = POSTPARAMS.get('password',False)
+
+start_session()
+
+
+def send_them_away():
+	SESSION['invalid_login'] = True
+	redirect('login')
+	
+
+
+
+if not (user_l and password_l):
+	send_them_away()
+
+user = user_l[0]
+password = password_l[0]
+
+if not user in users_hash:
+	send_them_away()
+	
+	
+if not password == users_hash[user]:
+	send_them_away()
+	
+
+SESSION['logged_in'] = True
+redirect('edit')

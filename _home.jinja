@@ -5,12 +5,21 @@
 
 	<link href="static/css/home.css" rel="stylesheet">
 	
+	<script src="static/js/jquery.js"></script>
+	<script src="static/js/home.js"></script>
 	
 </head>
 
 <body>
 	
 <div class="container">
+	
+	{%if logged_in %}
+	<div id="admin" data-logged-in="true">edit</div>
+	{% else %}
+	<div id="admin" data-logged-in="false">login</div>
+	{% endif %}
+	
 	
 	<div id="info">
 		
@@ -25,9 +34,22 @@
 	
 	<div id="posts">
 		
+		{% if not posts %}
+		<h1>There are no posts</h1>
+		{% endif %}
+		
+		
 		{% for post in posts %}
 		<div class="post">
-		{{ post.html|safe }}
+			{% if post.body %}
+				<h1> {{post.title}}</h1>
+				{{ post.body | safe }}
+			{% else %}
+				<span class="open_post" data-post-id={{post.id}}><h1>{{post.title}}</h1></a></span>
+				<div class="loader invisible">
+					<img src="static/images/loader.gif"/>
+				</div>
+			{% endif %}
 		</div>
 		{% endfor %}
 	</div>
