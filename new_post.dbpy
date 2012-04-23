@@ -1,0 +1,38 @@
+import time
+
+start_session()
+
+
+
+logged_in = SESSION.get('logged_in',False)
+
+if not logged_in:
+	die("You must be logged in to make a new post")
+	
+
+posts_meta = open_json('_posts.json')
+
+highest = 0
+for k in posts_meta:
+	k = int(k)
+	highest = k if k > highest else highest
+	
+new_post_id = str(highest+1)
+
+new_post = {}
+
+new_post['id'] = new_post_id
+new_post['date'] = int(time.time())
+new_post['title'] = 'untitled %d'%(int(time.time()))
+new_post['published'] = False
+
+posts_meta[new_post_id] = new_post
+
+close_json(posts_meta)
+
+new_post_path = "_posts/post_%s.markdown"%new_post_id
+
+write_file(new_post_path,"")
+
+
+redirect('edit?id=%s'%new_post_id)

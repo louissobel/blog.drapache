@@ -1,0 +1,94 @@
+<html>
+
+
+<head>
+
+	<title>Edit Blog</title>
+	
+	<link rel="stylesheet" href="static/css/edit_blog.css">
+	
+	<script src="static/lib/jquery/jquery.js"></script>
+	<script src="static/js/edit_blog.js"></script>
+	
+	
+</head>
+
+
+<body>
+	
+	
+	<div class="content">
+		
+		<div id="loader_holder" class="invisible">
+			<img src="static/images/loader.gif"/>
+		</div>
+		
+		<div id="nav_holder">
+			<a href="index.dbpy"><div class="action-button">home</div></a>
+			<a href="do_logout.dbpy"><div class="action-button">logout</div></a>
+		</div>
+		
+		
+		<div class="table_wrapper">
+			<table id="posts_table" cellspacing="0px">
+			
+				<tr class="heading">
+				
+					<td class="post-title">
+						<h1>Posts</h1><span class="note">   (click title to edit)</span>
+					</td>
+				
+					<td class="status in-progress">
+						<h3>in-progress</h3>
+					</td>
+				
+					<td class="status published">
+						<h3>published</h3>
+					</td>
+				
+				</tr>
+				
+				{% for post in posts %}
+				<tr class="post">
+				
+					<td class="post-title">
+					
+						<div class="delete_tag_container">
+						<span class="delete_tag">
+							<div class="icon minus delete-post" data-post-id={{post.id}}>&ndash;</div>
+						</span>
+						</div>
+					
+						<a href="edit?id={{post.id}}"><h2>{{ post.title }}</h2></a>
+					
+					
+					</td>
+				
+					<td data-post-id="{{post.id}}" class="status in-progress {% if not post.published %}selected{% endif %}">
+					&nbsp;
+					</td>
+				
+					<td data-post-id="{{post.id}}" class="status published {% if post.published %}selected{% endif %}">
+					&nbsp;
+					</td>
+				</tr>
+				{% endfor %}
+			
+			</table>
+		
+			<div class="new_post">
+				<a href="new_post.dbpy">
+				<div class="icon plus">+</div>
+				<span class="text">New Post</span>
+				</a>
+			</div>
+		
+			<div class="help_message">
+			<span class="note" id="help_message"></span>
+			<div>
+		</div>
+	</div>
+	
+</body>
+		
+				

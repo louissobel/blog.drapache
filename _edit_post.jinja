@@ -1,0 +1,54 @@
+<html>
+
+<head>
+
+<title>Edit Post -- {{ info.title }}</title>
+
+
+<script src="static/lib/jquery/jquery.js"></script>
+<script src="static/lib/codemirror/lib/codemirror.js"></script>
+
+<link rel="stylesheet" href="static/lib/codemirror/lib/codemirror.css">
+
+<script src="static/lib/codemirror/mode/xml/xml.js"></script>
+<script src="static/lib/codemirror/mode/markdown/markdown.js"></script>
+
+<script src="static/js/edit_post.js"></script>
+
+<link rel="stylesheet" href="static/css/edit_post.css"/>
+
+</head>
+
+<body>
+	
+<div class="container">
+
+
+	<div id="nav_holder">
+		<a href="do_logout.dbpy"><div class="action-button">logout</div></a>
+		<a href="index.dbpy"><div class="action-button">home</div></a>		
+		<div class="action-button" id="back">back</div>		
+		<div class="action-button" id="save">save</div>
+	</div>
+
+	
+<h3>Title:</h3> <input type="text" id="title" data-post-id="{{info.id}}" value="{{info.title}}"/>
+<h3>Body:</h3>
+	<div class="editor_holder">
+	<textarea id="editor">
+{{markdown}}
+	</textarea>
+	</div>
+	
+	<div id="saving_indicator" class="invisible">
+		<img src="static/images/loader.gif"/>
+		<i>saving...</i>
+	</div>
+	
+</div>
+		
+</body>
+
+
+</html>
+

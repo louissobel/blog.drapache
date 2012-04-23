@@ -5,7 +5,7 @@
 
 	<link href="static/css/home.css" rel="stylesheet">
 	
-	<script src="static/js/jquery.js"></script>
+	<script src="static/lib/jquery/jquery.js"></script>
 	<script src="static/js/home.js"></script>
 	
 </head>
@@ -14,11 +14,14 @@
 	
 <div class="container">
 	
+	<div id="nav_holder" data-logged-in="{{ logged_in }}">
 	{%if logged_in %}
-	<div id="admin" data-logged-in="true">edit</div>
+	<a href="do_logout.dbpy"><div class="action-button">logout</div></a>
+	<a href="edit"><div class="action-button">edit</div></a>
 	{% else %}
-	<div id="admin" data-logged-in="false">login</div>
+	<a href="login"><div class="action-button">login</div></a>
 	{% endif %}
+	</div>
 	
 	
 	<div id="info">

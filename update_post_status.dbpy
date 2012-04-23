@@ -1,0 +1,34 @@
+
+
+start_session()
+
+
+logged_in = SESSION.get('logged_in',False)
+
+
+if not logged_in:
+	set_response_status(401)
+	die("Forbidden")
+	
+
+if not 'id' in GETPARAMS:
+	die("bad parameters")
+	
+if not 'published' in GETPARAMS:
+	die("bad parameters")
+
+post_id = GETPARAMS['id'][0]
+published_param = GETPARAMS['published'][0]
+
+if published_param=="true":
+	published = True
+else:
+	published = False
+
+
+post_info = open_json('_posts.json')
+
+post_info[post_id]['published'] = published
+
+print "ok"
+

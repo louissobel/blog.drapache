@@ -33,4 +33,4 @@ if not password == users_hash[user]:
 	
 
 SESSION['logged_in'] = True
-redirect('edit')
+redirect('index.dbpy')

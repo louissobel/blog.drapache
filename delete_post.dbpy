@@ -1,0 +1,28 @@
+
+start_session()
+
+logged_in = SESSION.get('logged_in',False)
+
+
+if not logged_in:
+	die("You must be logged in to delete a post!")
+
+
+try:
+	post_id = POSTPARAMS.get('id',[])[0]
+except IndexError:
+	die("Bad parameters")
+	
+post_path = "_posts/post_%s.markdown" % post_id
+
+delete_file(post_path)
+
+
+posts_meta = open_json('_posts.json')
+
+if post_id in posts_meta:
+	del posts_meta[post_id]
+
+
+print "ok"
+	

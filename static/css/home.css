@@ -38,12 +38,18 @@ div.container {
 }
 
 
-div#admin {
+div#nav_holder {
 	position:absolute;
 	right:20px;
 	top:0px;
+}
+
+div.action-button {
 	height:20px;
-	width:40px;
+	float:right;
+	padding:4px;
+	margin-left:5px;
+	margin-right:5px;
 	border-color:black;
 	border-style:solid;
 	border-width:1px;
@@ -52,7 +58,7 @@ div#admin {
 	text-align:center;
 }
 
-div#admin:hover {
+div.action-button:hover {
 	background-color:black;
 	color:white;
 	cursor:pointer;

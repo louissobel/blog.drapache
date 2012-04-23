@@ -16,13 +16,5 @@ $('document').ready(function() {
 		});
 	});
 	
-	$('#admin').click(function () {
-		if (this.dataset['loggedIn'] == "true") {
-			document.location = 'edit';
-		} else {
-			document.location = 'login';
-		}
-	});
-	
 
 });
