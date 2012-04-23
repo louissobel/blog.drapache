@@ -33,7 +33,7 @@ if logged_in:
 	else:
 		template_data = {}
 		
-		posts_list = [t[1] for t in sorted([(h['date'],h) for h in posts_meta.values()])]
+		posts_list = [t[1] for t in reversed(sorted([(h['date'],h) for h in posts_meta.values()]))]
 		
 		template_data['posts'] = posts_list
 		render_template('_edit_blog.jinja',with_data=template_data)

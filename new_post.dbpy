@@ -21,7 +21,7 @@ new_post_id = str(highest+1)
 
 new_post = {}
 
-new_post['id'] = new_post_id
+new_post['id'] = int(new_post_id)
 new_post['date'] = int(time.time())
 new_post['title'] = 'untitled %d'%(int(time.time()))
 new_post['published'] = False
