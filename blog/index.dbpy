@@ -21,4 +21,4 @@ template_data['logged_in'] = logged_in
 template_data['info'] = info
 template_data['posts'] = posts_list
 
-render_template('_home.jinja',with_data=template_data)
+render_template('_templates/_home.jinja',with_data=template_data)

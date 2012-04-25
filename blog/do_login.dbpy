@@ -1,9 +1,7 @@
 
 
-users_hash = {'sobel':'test',
-				'sample':'abc123'}
-				
-				
+users_hash = {'example':'password'}
+					
 user_l = POSTPARAMS.get('username',False)
 
 password_l = POSTPARAMS.get('password',False)
@@ -33,4 +31,4 @@ if not password == users_hash[user]:
 	
 
 SESSION['logged_in'] = True
-redirect('index.dbpy')
+redirect('.')

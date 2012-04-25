@@ -2,4 +2,4 @@ start_session()
 
 
 SESSION['logged_in'] = False
-redirect('index.dbpy')
+redirect('.')

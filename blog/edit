@@ -27,7 +27,7 @@ if logged_in:
 		template_data = {}
 		template_data['info'] = post_meta
 		template_data['markdown'] = read_file(post_file)
-		render_template('_edit_post.jinja',with_data=template_data)
+		render_template('_templates/_edit_post.jinja',with_data=template_data)
 		die()
 		
 	else:
@@ -36,7 +36,7 @@ if logged_in:
 		posts_list = [t[1] for t in reversed(sorted([(h['date'],h) for h in posts_meta.values()]))]
 		
 		template_data['posts'] = posts_list
-		render_template('_edit_blog.jinja',with_data=template_data)
+		render_template('_templates/_edit_blog.jinja',with_data=template_data)
 		die()
 		
 		
