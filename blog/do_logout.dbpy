@@ -1,5 +1,6 @@
-start_session()
+dbpy.session.start()
 
 
-SESSION['logged_in'] = False
-redirect('.')
+dbpy.session['logged_in'] = False
+
+dbpy.http.redirect('.')

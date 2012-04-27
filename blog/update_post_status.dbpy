@@ -1,24 +1,24 @@
 
 
-start_session()
+dbpy.session.start()
 
 
-logged_in = SESSION.get('logged_in',False)
+logged_in = dbpy.session.get('logged_in',False)
 
 
 if not logged_in:
-	set_response_status(401)
-	die("Forbidden")
+	dbpy.http.set_response_status(401)
+	dbpy.die("Forbidden")
 	
 
-if not 'id' in GETPARAMS:
-	die("bad parameters")
+if not 'id' in dbpy.get_params:
+	dbpy.die("bad parameters")
 	
-if not 'published' in GETPARAMS:
-	die("bad parameters")
+if not 'published' in dbpy.get_params:
+	dbpy.die("bad parameters")
 
-post_id = GETPARAMS['id'][0]
-published_param = GETPARAMS['published'][0]
+post_id = dbpy.get_params['id'][0]
+published_param = dbpy.get_params['published'][0]
 
 if published_param=="true":
 	published = True
@@ -26,7 +26,7 @@ else:
 	published = False
 
 
-post_info = open_json('_posts.json')
+post_info = dbpy.io.json.open('_posts.json')
 
 post_info[post_id]['published'] = published
 

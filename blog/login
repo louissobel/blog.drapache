@@ -1,21 +1,21 @@
 #DBPYEXECUTE
 
-start_session()
+dbpy.session.start()
 
-invalid_login = SESSION.get('invalid_login',False)
-failed_attempt = SESSION.get('failed_attempt',False)
+invalid_login = dbpy.session.get('invalid_login',False)
+failed_attempt = dbpy.session.get('failed_attempt',False)
 
 error = False
 
 if invalid_login:
 	error = True
 	error_message = "Invalid login credentials"
-	SESSION['invalid_login'] = False
+	dbpy.session['invalid_login'] = False
 	
 elif failed_attempt:
 	error = True
 	error_message = "You have to be signed in to access that part of the site"
-	SESSION['failed_attempt'] = False
+	dbpy.session['failed_attempt'] = False
 
 
 

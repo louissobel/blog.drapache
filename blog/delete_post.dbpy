@@ -1,24 +1,24 @@
 
-start_session()
+dbpy.session.start()
 
-logged_in = SESSION.get('logged_in',False)
+logged_in = dbpy.session.get('logged_in',False)
 
 
 if not logged_in:
-	die("You must be logged in to delete a post!")
+	dbpy.die("You must be logged in to delete a post!")
 
 
 try:
-	post_id = POSTPARAMS.get('id',[])[0]
+	post_id = dbpy.post_params.get('id',[])[0]
 except IndexError:
 	die("Bad parameters")
 	
 post_path = "_posts/post_%s.markdown" % post_id
 
-delete_file(post_path)
+dbpy.io.file.delete(post_path)
 
 
-posts_meta = open_json('_posts.json')
+posts_meta = dbpy.io.json.open('_posts.json')
 
 if post_id in posts_meta:
 	del posts_meta[post_id]

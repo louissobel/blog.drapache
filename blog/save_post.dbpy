@@ -1,27 +1,27 @@
 
-start_session()
+dbpy.session.start()
 
 
-logged_in = SESSION.get('logged_in',False)
+logged_in = dbpy.session.get('logged_in',False)
 
 
 if not logged_in:
 	die("must be logged in to save a post")
 	
 try:	
-	post_id = POSTPARAMS.get('id',[])[0]
-	title = POSTPARAMS.get('title',[])[0]
-	body = POSTPARAMS.get('body',[])[0]
+	post_id = dbpy.post_params.get('id',[])[0]
+	title = dbpy.post_params.get('title',[])[0]
+	body = dbpy.post_params.get('body',[])[0]
 except IndexError:
 	die("bad parameters")
 
 	
 post_path = "_posts/post_%s.markdown"%post_id
 
-write_file(post_path,body)
+dbpy.io.file.write(post_path,body)
 
 
-posts_meta = open_json('_posts.json')
+posts_meta = dbpy.io.json.open('_posts.json')
 
 posts_meta[post_id]['title'] = title
 

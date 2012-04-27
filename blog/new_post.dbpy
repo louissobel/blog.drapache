@@ -1,16 +1,16 @@
 import time
 
-start_session()
+dbpy.session.start()
 
 
 
-logged_in = SESSION.get('logged_in',False)
+logged_in = dbpy.session.get('logged_in',False)
 
 if not logged_in:
-	die("You must be logged in to make a new post")
+	dbpy.die("You must be logged in to make a new post")
 	
 
-posts_meta = open_json('_posts.json')
+posts_meta = dbpy.io.json.open('_posts.json')
 
 highest = 0
 for k in posts_meta:
@@ -28,11 +28,11 @@ new_post['published'] = False
 
 posts_meta[new_post_id] = new_post
 
-close_json(posts_meta)
+dbpy.io.json.close(posts_meta)
 
 new_post_path = "_posts/post_%s.markdown"%new_post_id
 
-write_file(new_post_path,"")
+dbpy.io.file.write(new_post_path,"")
 
 
-redirect('edit?id=%s'%new_post_id)
+dbpy.http.redirect('edit?id=%s'%new_post_id)

@@ -2,16 +2,16 @@
 
 users_hash = {'example':'password'}
 					
-user_l = POSTPARAMS.get('username',False)
+user_l = dbpy.post_params.get('username',False)
 
-password_l = POSTPARAMS.get('password',False)
+password_l = dbpy.post_params.get('password',False)
 
-start_session()
+dbpy.session.start()
 
 
 def send_them_away():
-	SESSION['invalid_login'] = True
-	redirect('login')
+	dbpy.session['invalid_login'] = True
+	dbpy.http.redirect('login')
 	
 
 
@@ -30,5 +30,5 @@ if not password == users_hash[user]:
 	send_them_away()
 	
 
-SESSION['logged_in'] = True
-redirect('.')
+dbpy.session['logged_in'] = True
+dbpy.http.redirect('.')

@@ -1,34 +1,34 @@
 #DBPYEXECUTE
 
 
-start_session()
+dbpy.session.start()
 
 
-logged_in = SESSION.get('logged_in')
+logged_in = dbpy.session.get('logged_in')
 
 
 if logged_in:
 
-	posts_meta = load_json('_posts.json')
+	posts_meta = dbpy.io.json.load('_posts.json')
 
-	if 'id' in GETPARAMS:
-		if not GETPARAMS['id']:
-			die()
+	if 'id' in dbpy.get_params:
+		if not dbpy.get_params['id']:
+			dbpy.die()
 			
-		post_id = GETPARAMS['id'][0]
+		post_id = dbpy.get_params['id'][0]
 		post_file = "_posts/post_%s.markdown" % post_id
 		
 		if post_id in posts_meta:
 			post_meta = posts_meta[post_id]
 		else:
-			die("Bad post id")
+			dbpy.die("Bad post id")
 
 		
 		template_data = {}
 		template_data['info'] = post_meta
-		template_data['markdown'] = read_file(post_file)
-		render_template('_templates/_edit_post.jinja',with_data=template_data)
-		die()
+		template_data['markdown'] = dbpy.io.file.read(post_file)
+		dbpy.templates.render('_templates/_edit_post.jinja',with_data=template_data)
+		dbpy.die()
 		
 	else:
 		template_data = {}
@@ -36,11 +36,11 @@ if logged_in:
 		posts_list = [t[1] for t in reversed(sorted([(h['date'],h) for h in posts_meta.values()]))]
 		
 		template_data['posts'] = posts_list
-		render_template('_templates/_edit_blog.jinja',with_data=template_data)
-		die()
+		dbpy.templates.render('_templates/_edit_blog.jinja',with_data=template_data)
+		dbpy.die()
 		
 		
 else:
 	
-	SESSION['failed_attempt'] = True
-	redirect('login')
+	dbpy.session['failed_attempt'] = True
+	dbpy.http.redirect('login')

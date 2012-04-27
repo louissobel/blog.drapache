@@ -1,13 +1,13 @@
 #DBPYEXECUTE
 
-if not 'id' in GETPARAMS:
+if not 'id' in dbpy.get_params:
 	die()
 	
-if not GETPARAMS['id']:
+if not dbpy.get_params['id']:
 	die()
 	
-post_id = int(GETPARAMS['id'][0])
+post_id = int(dbpy.get_params['id'][0])
 
 post_path = "_posts/post_%d.markdown" % post_id
 
-print markdown_to_html(read_file(post_path))
+print dbpy.text.markdown_to_html(dbpy.io.file.read(post_path))

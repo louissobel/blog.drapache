@@ -13,4 +13,4 @@ Notes:
 
 - Some admin actions are really really slow (on the order of 5,10 seconds) because of the number of requests that
   must be made, one after another, to dropbox. This will improve once asynchronous IO is added to dbpy.
-- 
+- Uses codemirror and jquery

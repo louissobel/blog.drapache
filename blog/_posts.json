@@ -4,5 +4,11 @@
         "published": true, 
         "id": 1, 
         "title": "Example Post"
-	}
+    }, 
+    "2": {
+        "date": 1335488868, 
+        "title": "New Post", 
+        "id": 2, 
+        "published": true
+    }
 }

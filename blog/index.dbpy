@@ -1,11 +1,11 @@
 
-start_session()
+dbpy.session.start()
 
-logged_in = SESSION.get('logged_in',False)
+logged_in = dbpy.session.get('logged_in',False)
 
-info = load_json('_info.json')
+info = dbpy.io.json.load('_info.json')
 
-posts_meta = load_json('_posts.json')
+posts_meta = dbpy.io.json.load('_posts.json')
 
 posts_list = [t[1] for t in reversed(sorted([(h['date'],h) for h in posts_meta.values() if h['published']]))]
 
@@ -13,7 +13,7 @@ if posts_list:
 	open_post = posts_list[0]
 		
 	open_post_path = "_posts/post_%d.markdown" % open_post['id']
-	open_post['body'] = markdown_to_html(read_file(open_post_path))
+	open_post['body'] = dbpy.text.markdown_to_html(dbpy.io.file.read(open_post_path))
 	
 	
 template_data = {}
@@ -21,4 +21,4 @@ template_data['logged_in'] = logged_in
 template_data['info'] = info
 template_data['posts'] = posts_list
 
-render_template('_templates/_home.jinja',with_data=template_data)
+dbpy.templates.render('_templates/_home.jinja',with_data=template_data)
