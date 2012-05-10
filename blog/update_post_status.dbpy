@@ -11,14 +11,14 @@ if not logged_in:
 	dbpy.die("Forbidden")
 	
 
-if not 'id' in dbpy.get_params:
+if not 'id' in dbpy.http.get_params:
 	dbpy.die("bad parameters")
 	
-if not 'published' in dbpy.get_params:
+if not 'published' in dbpy.http.get_params:
 	dbpy.die("bad parameters")
 
-post_id = dbpy.get_params['id'][0]
-published_param = dbpy.get_params['published'][0]
+post_id = dbpy.http.get_params['id'][0]
+published_param = dbpy.http.get_params['published'][0]
 
 if published_param=="true":
 	published = True

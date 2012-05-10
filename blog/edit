@@ -11,11 +11,11 @@ if logged_in:
 
 	posts_meta = dbpy.io.json.load('_posts.json')
 
-	if 'id' in dbpy.get_params:
-		if not dbpy.get_params['id']:
+	if 'id' in dbpy.http.get_params:
+		if not dbpy.http.get_params['id']:
 			dbpy.die()
 			
-		post_id = dbpy.get_params['id'][0]
+		post_id = dbpy.http.get_params['id'][0]
 		post_file = "_posts/post_%s.markdown" % post_id
 		
 		if post_id in posts_meta:

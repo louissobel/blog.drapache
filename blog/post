@@ -1,12 +1,12 @@
 #DBPYEXECUTE
 
-if not 'id' in dbpy.get_params:
+if not 'id' in dbpy.http.get_params:
 	die()
 	
-if not dbpy.get_params['id']:
+if not dbpy.http.get_params['id']:
 	die()
 	
-post_id = int(dbpy.get_params['id'][0])
+post_id = int(dbpy.http.get_params['id'][0])
 
 post_path = "_posts/post_%d.markdown" % post_id
 

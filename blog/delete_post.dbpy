@@ -9,13 +9,13 @@ if not logged_in:
 
 
 try:
-	post_id = dbpy.post_params.get('id',[])[0]
+	post_id = dbpy.http.post_params.get('id',[])[0]
 except IndexError:
 	die("Bad parameters")
 	
 post_path = "_posts/post_%s.markdown" % post_id
 
-dbpy.io.file.delete(post_path)
+dbpy.dropbox.remove(post_path)
 
 
 posts_meta = dbpy.io.json.open('_posts.json')
